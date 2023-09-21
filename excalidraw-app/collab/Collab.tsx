@@ -272,12 +272,12 @@ class Collab extends PureComponent<Props, CollabState> {
       ),
     );
 
-    if (this.portal.socket && this.fallbackInitializationHandler) {
-      this.portal.socket.off(
-        "connect_error",
-        this.fallbackInitializationHandler,
-      );
-    }
+    // if (this.portal.socket && this.fallbackInitializationHandler) {
+    //   this.portal.socket.off(
+    //     "connect_error",
+    //     this.fallbackInitializationHandler,
+    //   );
+    // }
 
     if (!keepRemoteState) {
       LocalData.fileStorage.reset();
@@ -374,7 +374,7 @@ class Collab extends PureComponent<Props, CollabState> {
     }
   };
 
-  private fallbackInitializationHandler: null | (() => any) = null;
+  // private fallbackInitializationHandler: null | (() => any) = null;
 
   startCollaboration = async (
     existingRoomLinkData: null | { roomId: string; roomKey: string },
@@ -413,15 +413,15 @@ class Collab extends PureComponent<Props, CollabState> {
       /* webpackChunkName: "socketIoClient" */ "socket.io-client"
     );
 
-    const fallbackInitializationHandler = () => {
-      this.initializeRoom({
-        roomLinkData: existingRoomLinkData,
-        fetchScene: true,
-      }).then((scene) => {
-        scenePromise.resolve(scene);
-      });
-    };
-    this.fallbackInitializationHandler = fallbackInitializationHandler;
+    // const fallbackInitializationHandler = () => {
+    //   this.initializeRoom({
+    //     roomLinkData: existingRoomLinkData,
+    //     fetchScene: true,
+    //   }).then((scene) => {
+    //     scenePromise.resolve(scene);
+    //   });
+    // };
+    // this.fallbackInitializationHandler = fallbackInitializationHandler;
 
     try {
       const socketServerData = await getCollabServer();
@@ -436,7 +436,7 @@ class Collab extends PureComponent<Props, CollabState> {
         roomKey,
       );
 
-      this.portal.socket.once("connect_error", fallbackInitializationHandler);
+      //this.portal.socket.once("connect_error", fallbackInitializationHandler);
     } catch (error: any) {
       console.error(error);
       this.setState({ errorMessage: error.message });
@@ -465,10 +465,10 @@ class Collab extends PureComponent<Props, CollabState> {
 
     // fallback in case you're not alone in the room but still don't receive
     // initial SCENE_INIT message
-    this.socketInitializationTimer = window.setTimeout(
-      fallbackInitializationHandler,
-      INITIAL_SCENE_UPDATE_TIMEOUT,
-    );
+    // this.socketInitializationTimer = window.setTimeout(
+    //   fallbackInitializationHandler,
+    //   INITIAL_SCENE_UPDATE_TIMEOUT,
+    // );
 
     // All socket listeners are moving to Portal
     this.portal.socket.on(
@@ -571,12 +571,12 @@ class Collab extends PureComponent<Props, CollabState> {
       }
     | { fetchScene: false; roomLinkData?: null }) => {
     clearTimeout(this.socketInitializationTimer!);
-    if (this.portal.socket && this.fallbackInitializationHandler) {
-      this.portal.socket.off(
-        "connect_error",
-        this.fallbackInitializationHandler,
-      );
-    }
+    // if (this.portal.socket && this.fallbackInitializationHandler) {
+    //   this.portal.socket.off(
+    //     "connect_error",
+    //     this.fallbackInitializationHandler,
+    //   );
+    // }
     if (fetchScene && roomLinkData && this.portal.socket) {
       this.excalidrawAPI.resetScene();
 
