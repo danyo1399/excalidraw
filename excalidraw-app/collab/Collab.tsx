@@ -484,6 +484,7 @@ class Collab extends PureComponent<Props, CollabState> {
           case "INVALID_RESPONSE":
             return;
           case WS_SCENE_EVENT_TYPES.INIT: {
+            console.log('lol in init socket initialised', this.portal.socketInitialized)
             if (!this.portal.socketInitialized) {
               this.initializeRoom({ fetchScene: false });
               const remoteElements = decryptedData.payload.elements;
@@ -543,11 +544,12 @@ class Collab extends PureComponent<Props, CollabState> {
       if (this.portal.socket) {
         this.portal.socket.off("first-in-room");
       }
-      const sceneData = await this.initializeRoom({
-        fetchScene: true,
-        roomLinkData: existingRoomLinkData,
-      });
-      scenePromise.resolve(sceneData);
+      // we load data from ws server now.
+      // const sceneData = await this.initializeRoom({
+      //   fetchScene: true,
+      //   roomLinkData: existingRoomLinkData,
+      // });
+      // scenePromise.resolve(sceneData);
     });
 
     this.initializeIdleDetector();
