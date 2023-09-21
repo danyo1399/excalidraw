@@ -27,7 +27,7 @@ export const FIREBASE_STORAGE_PREFIXES = {
   collabFiles: `/files/rooms`,
 };
 
-export const ROOM_ID_BYTES = 10;
+export const ROOM_ID_BYTES = 20;
 
 export const STORAGE_KEYS = {
   LOCAL_STORAGE_ELEMENTS: "excalidraw",
