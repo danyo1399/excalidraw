@@ -565,10 +565,11 @@ class Collab extends PureComponent<Props, CollabState> {
     fetchScene,
     roomLinkData,
   }:
-    | {
-        fetchScene: true;
-        roomLinkData: { roomId: string; roomKey: string } | null;
-      }
+    // |
+    //                                 {
+    //     fetchScene: true;
+    //     roomLinkData: { roomId: string; roomKey: string } | null;
+    //   }
     | { fetchScene: false; roomLinkData?: null }) => {
     clearTimeout(this.socketInitializationTimer!);
     // if (this.portal.socket && this.fallbackInitializationHandler) {
@@ -577,34 +578,34 @@ class Collab extends PureComponent<Props, CollabState> {
     //     this.fallbackInitializationHandler,
     //   );
     // }
-    if (fetchScene && roomLinkData && this.portal.socket) {
-      this.excalidrawAPI.resetScene();
-
-      try {
-        const elements = await loadFromFirebase(
-          roomLinkData.roomId,
-          roomLinkData.roomKey,
-          this.portal.socket,
-        );
-        if (elements) {
-          this.setLastBroadcastedOrReceivedSceneVersion(
-            getSceneVersion(elements),
-          );
-
-          return {
-            elements,
-            scrollToContent: true,
-          };
-        }
-      } catch (error: any) {
-        // log the error and move on. other peers will sync us the scene.
-        console.error(error);
-      } finally {
-        this.portal.socketInitialized = true;
-      }
-    } else {
-      this.portal.socketInitialized = true;
-    }
+    // if (fetchScene && roomLinkData && this.portal.socket) {
+    //   this.excalidrawAPI.resetScene();
+    //
+    //   try {
+    //     const elements = await loadFromFirebase(
+    //       roomLinkData.roomId,
+    //       roomLinkData.roomKey,
+    //       this.portal.socket,
+    //     );
+    //     if (elements) {
+    //       this.setLastBroadcastedOrReceivedSceneVersion(
+    //         getSceneVersion(elements),
+    //       );
+    //
+    //       return {
+    //         elements,
+    //         scrollToContent: true,
+    //       };
+    //     }
+    //   } catch (error: any) {
+    //     // log the error and move on. other peers will sync us the scene.
+    //     console.error(error);
+    //   } finally {
+    //     this.portal.socketInitialized = true;
+    //   }
+    // } else {
+    //   this.portal.socketInitialized = true;
+    // }
     return null;
   };
 
