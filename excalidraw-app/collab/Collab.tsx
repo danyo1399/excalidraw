@@ -604,7 +604,7 @@ class Collab extends PureComponent<Props, CollabState> {
     //     this.portal.socketInitialized = true;
     //   }
     // } else {
-    //   this.portal.socketInitialized = true;
+    this.portal.socketInitialized = true;
     // }
     return null;
   };
