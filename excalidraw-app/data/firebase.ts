@@ -287,6 +287,7 @@ export const loadFromFirebase = async (
   roomKey: string,
   socket: SocketIOClient.Socket | null,
 ): Promise<readonly ExcalidrawElement[] | null> => {
+  console.log('lol load from firebase')
   const firebase = await loadFirestore();
   const db = firebase.firestore();
 
