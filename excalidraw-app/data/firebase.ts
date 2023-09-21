@@ -110,6 +110,7 @@ const encryptElements = async (
   key: string,
   elements: readonly ExcalidrawElement[],
 ): Promise<{ ciphertext: ArrayBuffer; iv: Uint8Array }> => {
+  console.log('lol encrypting', elements)
   const json = JSON.stringify(elements);
   const encoded = new TextEncoder().encode(json);
   const { encryptedBuffer, iv } = await encryptData(key, encoded);
@@ -128,7 +129,9 @@ const decryptElements = async (
   const decodedData = new TextDecoder("utf-8").decode(
     new Uint8Array(decrypted),
   );
-  return JSON.parse(decodedData);
+  const obj = JSON.parse(decodedData);
+  console.log('lol decrypted', obj);
+  return obj
 };
 
 class FirebaseSceneVersionCache {
@@ -199,6 +202,7 @@ const createFirebaseSceneDocument = async (
   elements: readonly SyncableExcalidrawElement[],
   roomKey: string,
 ) => {
+  console.log('lol createFirebaseSceneDocument')
   const sceneVersion = getSceneVersion(elements);
   const { ciphertext, iv } = await encryptElements(roomKey, elements);
   return {
@@ -241,6 +245,7 @@ export const saveToFirebase = async (
         roomKey,
       );
 
+      console.log('lol creating doc');
       transaction.set(docRef, sceneDocument);
 
       return {
@@ -264,6 +269,7 @@ export const saveToFirebase = async (
       roomKey,
     );
 
+    console.log('lol updating doc');
     transaction.update(docRef, sceneDocument);
     return {
       elements,
@@ -325,7 +331,7 @@ export const loadFilesFromFirebase = async (
               decryptionKey,
             },
           );
-
+        console.log('lol loaded file', {id, data, metadata})
           const dataURL = new TextDecoder().decode(data) as DataURL;
 
           loadedFiles.push({

@@ -136,6 +136,7 @@ class Collab extends PureComponent<Props, CollabState> {
           throw new AbortError();
         }
 
+        console.log('lol saving files', {addedFiles, roomId})
         return saveFilesToFirebase({
           prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
           files: await encodeFilesForUpload({
@@ -483,6 +484,7 @@ class Collab extends PureComponent<Props, CollabState> {
           this.portal.roomKey,
         );
 
+        console.log('lol received ws event', decryptedData)
         switch (decryptedData.type) {
           case "INVALID_RESPONSE":
             return;
