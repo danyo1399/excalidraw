@@ -86,6 +86,24 @@ class Portal {
   ) {
     if (this.isOpen()) {
       const json = JSON.stringify(data);
+      // const encoded = new TextEncoder().encode(json);
+      console.log('lol sending ws event', {data})
+      //const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
+
+      this.socket?.emit(
+        volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
+        this.roomId,
+        json
+      );
+    }
+  }
+
+  async _broadcastSocketData_Obsolete(
+    data: SocketUpdateData,
+    volatile: boolean = false,
+  ) {
+    if (this.isOpen()) {
+      const json = JSON.stringify(data);
       const encoded = new TextEncoder().encode(json);
       console.log('lol sending ws event', data)
       const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
@@ -177,7 +195,6 @@ class Portal {
     }
 
     this.queueFileUpload();
-
     await this._broadcastSocketData(data as SocketUpdateData);
   };
 

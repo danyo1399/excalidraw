@@ -473,16 +473,11 @@ class Collab extends PureComponent<Props, CollabState> {
     // All socket listeners are moving to Portal
     this.portal.socket.on(
       "client-broadcast",
-      async (encryptedData: ArrayBuffer, iv: Uint8Array) => {
+      async (encryptedData: string) => {
         if (!this.portal.roomKey) {
           return;
         }
-
-        const decryptedData = await this.decryptPayload(
-          iv,
-          encryptedData,
-          this.portal.roomKey,
-        );
+        const decryptedData: any = JSON.parse(encryptedData);
 
         console.log('lol received ws event', decryptedData)
         switch (decryptedData.type) {
