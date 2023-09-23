@@ -148,14 +148,14 @@ export const RoomModal = ({
         </div>
         <div className="RoomDialog__active__description">
           <p>
-            <span
-              role="img"
-              aria-hidden="true"
-              className="RoomDialog__active__description__emoji"
-            >
-              🔒{" "}
-            </span>
-            {t("roomDialog.desc_privacy")}
+            {/*<span*/}
+            {/*  role="img"*/}
+            {/*  aria-hidden="true"*/}
+            {/*  className="RoomDialog__active__description__emoji"*/}
+            {/*>*/}
+            {/*  🔒{" "}*/}
+            {/*</span>*/}
+            {/*{t("roomDialog.desc_privacy")}*/}
           </p>
           <p>{t("roomDialog.desc_exitSession")}</p>
         </div>
@@ -188,7 +188,7 @@ export const RoomModal = ({
 
       <div className="RoomDialog__inactive__description">
         <strong>{t("roomDialog.desc_intro")}</strong>
-        {t("roomDialog.desc_privacy")}
+        {/*{t("roomDialog.desc_privacy")}*/}
       </div>
 
       <div className="RoomDialog__inactive__start_session">
