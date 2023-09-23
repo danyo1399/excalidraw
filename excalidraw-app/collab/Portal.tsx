@@ -87,7 +87,7 @@ class Portal {
     if (this.isOpen()) {
       const json = JSON.stringify(data);
       // const encoded = new TextEncoder().encode(json);
-      console.log('lol sending ws event', {data})
+      //console.log('lol sending ws event', {data})
       //const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 
       this.socket?.emit(
@@ -105,7 +105,7 @@ class Portal {
     if (this.isOpen()) {
       const json = JSON.stringify(data);
       const encoded = new TextEncoder().encode(json);
-      console.log('lol sending ws event', data)
+      //console.log('lol sending ws event', data)
       const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 
       this.socket?.emit(

@@ -71,6 +71,7 @@ import { resetBrowserStateVersions } from "../data/tabSync";
 import { LocalData } from "../data/LocalData";
 import { atom, useAtom } from "jotai";
 import { appJotaiStore } from "../app-jotai";
+import {loadFilesFromAppServer, saveFilesToAppServer} from "../data/appserver";
 
 export const collabAPIAtom = atom<CollabAPI | null>(null);
 export const collabDialogShownAtom = atom(false);
@@ -128,7 +129,8 @@ class Collab extends PureComponent<Props, CollabState> {
           throw new AbortError();
         }
 
-        return loadFilesFromFirebase(`files/rooms/${roomId}`, roomKey, fileIds);
+        return loadFilesFromAppServer(roomId, roomKey, fileIds);
+        //return loadFilesFromFirebase(`files/rooms/${roomId}`, roomKey, fileIds);
       },
       saveFiles: async ({ addedFiles }) => {
         const { roomId, roomKey } = this.portal;
@@ -136,15 +138,17 @@ class Collab extends PureComponent<Props, CollabState> {
           throw new AbortError();
         }
 
-        console.log('lol saving files', {addedFiles, roomId})
-        return saveFilesToFirebase({
-          prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
-          files: await encodeFilesForUpload({
-            files: addedFiles,
-            encryptionKey: roomKey,
-            maxBytes: FILE_UPLOAD_MAX_BYTES,
-          }),
+        // console.log('lol saving files', {addedFiles, roomId})
+        const files = await encodeFilesForUpload({
+          files: addedFiles,
+          encryptionKey: roomKey,
+          maxBytes: FILE_UPLOAD_MAX_BYTES,
         });
+        return await saveFilesToAppServer(roomId, files)
+        // return saveFilesToFirebase({
+        //   prefix: `${FIREBASE_STORAGE_PREFIXES.collabFiles}/${roomId}`,
+        //   files,
+        // });
       },
     });
     this.excalidrawAPI = props.excalidrawAPI;
@@ -477,6 +481,13 @@ class Collab extends PureComponent<Props, CollabState> {
         if (!this.portal.roomKey) {
           return;
         }
+
+        // const decryptedData = await this.decryptPayload(
+        //   iv,
+        //   encryptedData,
+        //   this.portal.roomKey,
+        // );
+
         const decryptedData: any = JSON.parse(encryptedData);
 
         console.log('lol received ws event', decryptedData)
