@@ -14,11 +14,11 @@ export const AppFooter = React.memo(() => {
           alignItems: "center",
         }}
       >
-        {isExcalidrawPlusSignedUser ? (
-          <ExcalidrawPlusAppLink />
-        ) : (
-          <EncryptedIcon />
-        )}
+        {/*{isExcalidrawPlusSignedUser ? (*/}
+        {/*  <ExcalidrawPlusAppLink />*/}
+        {/*) : (*/}
+        {/*  <EncryptedIcon />*/}
+        {/*)}*/}
       </div>
     </Footer>
   );
