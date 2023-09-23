@@ -1,3 +1,27 @@
+# Excalidraw Selfhosted
+
+## Goals
+The goal of this project is optimize excalidraw for self hosted environments with many concurrent collaborators
+focusing on collaboration mode
+
+## How does this
+## Technical differences from Excalidraw
+- Files and state persistence have moved from firebase to selfhosted server to
+  remove size limitations
+- Collaboration conflict resolution is not done on the server to reduce traffic
+  (removes end to end encryption)
+- All loading / saving collaboration sessions happen via the web sockets collab server
+
+## Functional differences from Excalidraw
+- Image file size and max resolution has increased 3x
+- Max canvas size restrictions removed
+- End to End encryption replaced with SSL encryption for data in transit
+- Any URL link can be embedded now without whitelisting
+
+
+
+Below has the original excalidraw docs
+
 <a href="https://excalidraw.com/" target="_blank" rel="noopener">
   <picture>
     <source media="(prefers-color-scheme: dark)" alt="Excalidraw" srcset="https://excalidraw.nyc3.cdn.digitaloceanspaces.com/github/excalidraw_github_cover_2_dark.png" />
