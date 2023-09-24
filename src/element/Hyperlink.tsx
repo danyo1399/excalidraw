@@ -104,17 +104,17 @@ export const Hyperlink = ({
         return;
       }
 
-      // if (false || !embeddableURLValidator(link, appProps.validateEmbeddable)) {
-      //   if (link) {
-      //     setToast({ message: t("toast.unableToEmbed"), closable: true });
-      //   }
-      //   element.link && embeddableLinkCache.set(element.id, element.link);
-      //   mutateElement(element, {
-      //     validated: false,
-      //     link,
-      //   });
-      //   ShapeCache.delete(element);
-      // } else {
+      if (!embeddableURLValidator(link, appProps.validateEmbeddable)) {
+        if (link) {
+          setToast({ message: t("toast.unableToEmbed"), closable: true });
+        }
+        element.link && embeddableLinkCache.set(element.id, element.link);
+        mutateElement(element, {
+          validated: false,
+          link,
+        });
+        ShapeCache.delete(element);
+      } else {
         const { width, height } = element;
         const embedLink = getEmbedLink(link);
         if (embedLink?.warning) {
@@ -149,7 +149,7 @@ export const Hyperlink = ({
         if (embeddableLinkCache.has(element.id)) {
           embeddableLinkCache.delete(element.id);
         }
-      //}
+      }
     } else {
       mutateElement(element, { link });
     }

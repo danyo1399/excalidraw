@@ -319,36 +319,37 @@ export const ShapesSwitcher = ({
               });
             }}
           />
-          <ToolButton
-            className={clsx("Shape", { fillable: false })}
-            type="radio"
-            icon={EmbedIcon}
-            checked={activeTool.type === "embeddable"}
-            name="editor-current-shape"
-            title={capitalizeString(t("toolBar.embeddable"))}
-            aria-label={capitalizeString(t("toolBar.embeddable"))}
-            data-testid={`toolbar-embeddable`}
-            onPointerDown={({ pointerType }) => {
-              if (!appState.penDetected && pointerType === "pen") {
-                setAppState({
-                  penDetected: true,
-                  penMode: true,
-                });
-              }
-            }}
-            onChange={({ pointerType }) => {
-              trackEvent("toolbar", "embeddable", "ui");
-              const nextActiveTool = updateActiveTool(appState, {
-                type: "embeddable",
-              });
-              setAppState({
-                activeTool: nextActiveTool,
-                multiElement: null,
-                selectedElementIds: {},
-                activeEmbeddable: null,
-              });
-            }}
-          />
+          {/*doesnt work properly in collab. Ends up constantly raising events back and forth*/}
+          {/*<ToolButton*/}
+          {/*  className={clsx("Shape", { fillable: false })}*/}
+          {/*  type="radio"*/}
+          {/*  icon={EmbedIcon}*/}
+          {/*  checked={activeTool.type === "embeddable"}*/}
+          {/*  name="editor-current-shape"*/}
+          {/*  title={capitalizeString(t("toolBar.embeddable"))}*/}
+          {/*  aria-label={capitalizeString(t("toolBar.embeddable"))}*/}
+          {/*  data-testid={`toolbar-embeddable`}*/}
+          {/*  onPointerDown={({ pointerType }) => {*/}
+          {/*    if (!appState.penDetected && pointerType === "pen") {*/}
+          {/*      setAppState({*/}
+          {/*        penDetected: true,*/}
+          {/*        penMode: true,*/}
+          {/*      });*/}
+          {/*    }*/}
+          {/*  }}*/}
+          {/*  onChange={({ pointerType }) => {*/}
+          {/*    trackEvent("toolbar", "embeddable", "ui");*/}
+          {/*    const nextActiveTool = updateActiveTool(appState, {*/}
+          {/*      type: "embeddable",*/}
+          {/*    });*/}
+          {/*    setAppState({*/}
+          {/*      activeTool: nextActiveTool,*/}
+          {/*      multiElement: null,*/}
+          {/*      selectedElementIds: {},*/}
+          {/*      activeEmbeddable: null,*/}
+          {/*    });*/}
+          {/*  }}*/}
+          {/*/>*/}
         </>
       ) : (
         <DropdownMenu open={isExtraToolsMenuOpen}>
@@ -381,22 +382,23 @@ export const ShapesSwitcher = ({
             >
               {t("toolBar.frame")}
             </DropdownMenu.Item>
-            <DropdownMenu.Item
-              onSelect={() => {
-                const nextActiveTool = updateActiveTool(appState, {
-                  type: "embeddable",
-                });
-                setAppState({
-                  activeTool: nextActiveTool,
-                  multiElement: null,
-                  selectedElementIds: {},
-                });
-              }}
-              icon={EmbedIcon}
-              data-testid="toolbar-embeddable"
-            >
-              {t("toolBar.embeddable")}
-            </DropdownMenu.Item>
+            {/*Doesnt work properly in collab. Constantly sends messages back and forth*/}
+            {/*<DropdownMenu.Item*/}
+            {/*  onSelect={() => {*/}
+            {/*    const nextActiveTool = updateActiveTool(appState, {*/}
+            {/*      type: "embeddable",*/}
+            {/*    });*/}
+            {/*    setAppState({*/}
+            {/*      activeTool: nextActiveTool,*/}
+            {/*      multiElement: null,*/}
+            {/*      selectedElementIds: {},*/}
+            {/*    });*/}
+            {/*  }}*/}
+            {/*  icon={EmbedIcon}*/}
+            {/*  data-testid="toolbar-embeddable"*/}
+            {/*>*/}
+            {/*  {t("toolBar.embeddable")}*/}
+            {/*</DropdownMenu.Item>*/}
           </DropdownMenu.Content>
         </DropdownMenu>
       )}
