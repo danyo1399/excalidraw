@@ -87,7 +87,9 @@ class Portal {
     if (this.isOpen()) {
       const json = JSON.stringify(data);
       // const encoded = new TextEncoder().encode(json);
-      //console.log('lol sending ws event', {data})
+      if(data.type !== 'MOUSE_LOCATION' && data.type !== 'IDLE_STATUS') {
+        console.log('lol sending ws event', data)
+      }
       //const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 
       this.socket?.emit(
@@ -98,24 +100,24 @@ class Portal {
     }
   }
 
-  async _broadcastSocketData_Obsolete(
-    data: SocketUpdateData,
-    volatile: boolean = false,
-  ) {
-    if (this.isOpen()) {
-      const json = JSON.stringify(data);
-      const encoded = new TextEncoder().encode(json);
-      //console.log('lol sending ws event', data)
-      const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
-
-      this.socket?.emit(
-        volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
-        this.roomId,
-        encryptedBuffer,
-        iv,
-      );
-    }
-  }
+  // async _broadcastSocketData(
+  //   data: SocketUpdateData,
+  //   volatile: boolean = false,
+  // ) {
+  //   if (this.isOpen()) {
+  //     const json = JSON.stringify(data);
+  //     const encoded = new TextEncoder().encode(json);
+  //     //console.log('lol sending ws event', data)
+  //     const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
+  //
+  //     this.socket?.emit(
+  //       volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
+  //       this.roomId,
+  //       encryptedBuffer,
+  //       iv,
+  //     );
+  //   }
+  // }
 
   queueFileUpload = throttle(async () => {
     try {

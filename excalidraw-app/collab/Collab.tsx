@@ -489,8 +489,9 @@ class Collab extends PureComponent<Props, CollabState> {
         // );
 
         const decryptedData: any = JSON.parse(encryptedData);
-
-        console.log('lol received ws event', decryptedData)
+        if(decryptedData.type != 'MOUSE_LOCATION' &&  decryptedData.type !== 'IDLE_STATUS') {
+          console.log('lol received ws event', decryptedData)
+        }
         switch (decryptedData.type) {
           case "INVALID_RESPONSE":
             return;
