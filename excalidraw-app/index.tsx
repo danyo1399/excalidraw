@@ -80,7 +80,7 @@ import {
 import { updateStaleImageStatuses } from "./data/FileManager";
 import { newElementWith } from "../src/element/mutateElement";
 import { isInitializedImageElement } from "../src/element/typeChecks";
-import { loadFilesFromFirebase } from "./data/firebase";
+// import { loadFilesFromFirebase } from "./data/firebase";
 import { LocalData } from "./data/LocalData";
 import { isBrowserStorageStateNewer } from "./data/tabSync";
 import clsx from "clsx";
@@ -352,18 +352,18 @@ const ExcalidrawWrapper = () => {
           }, [] as FileId[]) || [];
 
         if (data.isExternalScene) {
-          loadFilesFromFirebase(
-            `${FIREBASE_STORAGE_PREFIXES.shareLinkFiles}/${data.id}`,
-            data.key,
-            fileIds,
-          ).then(({ loadedFiles, erroredFiles }) => {
-            excalidrawAPI.addFiles(loadedFiles);
-            updateStaleImageStatuses({
-              excalidrawAPI,
-              erroredFiles,
-              elements: excalidrawAPI.getSceneElementsIncludingDeleted(),
-            });
-          });
+          // loadFilesFromFirebase(
+          //   `${FIREBASE_STORAGE_PREFIXES.shareLinkFiles}/${data.id}`,
+          //   data.key,
+          //   fileIds,
+          // ).then(({ loadedFiles, erroredFiles }) => {
+          //   excalidrawAPI.addFiles(loadedFiles);
+          //   updateStaleImageStatuses({
+          //     excalidrawAPI,
+          //     erroredFiles,
+          //     elements: excalidrawAPI.getSceneElementsIncludingDeleted(),
+          //   });
+          // });
         } else if (isInitialLoad) {
           if (fileIds.length) {
             LocalData.fileStorage
@@ -703,18 +703,20 @@ const ExcalidrawWrapper = () => {
               onExportToBackend,
               renderCustomUI: (elements, appState, files) => {
                 return (
-                  <ExportToExcalidrawPlus
-                    elements={elements}
-                    appState={appState}
-                    files={files}
-                    onError={(error) => {
-                      excalidrawAPI?.updateScene({
-                        appState: {
-                          errorMessage: error.message,
-                        },
-                      });
-                    }}
-                  />
+                  <>
+                  </>
+                  // <ExportToExcalidrawPlus
+                  //   elements={elements}
+                  //   appState={appState}
+                  //   files={files}
+                  //   onError={(error) => {
+                  //     excalidrawAPI?.updateScene({
+                  //       appState: {
+                  //         errorMessage: error.message,
+                  //       },
+                  //     });
+                  //   }}
+                  // />
                 );
               },
             },
