@@ -16,9 +16,18 @@ focusing on collaboration mode
 - Image file size and max resolution has increased 3x
 - Max canvas size restrictions removed
 - End to End encryption replaced with SSL encryption for data in transit
+- Collab sessions with lots of people should reduce less errors because only
+  differences are synced now and syncing happens on server
 - Any URL link can be embedded now without whitelisting
 
-
+## TODO
+- Implement authentication
+- Add back in sync all scene elements, and not just incremental changes
+  (might be useful when shutting down collab session in case anything was missed)
+- Delete old collab sessions that have not been updated for awhile
+- limit collab sessions held in memory.
+- backup collab sessions, add ability to create snapshots
+-
 
 Below has the original excalidraw docs
 
