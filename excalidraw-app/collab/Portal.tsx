@@ -18,7 +18,7 @@ import throttle from "lodash.throttle";
 import { newElementWith } from "../../src/element/mutateElement";
 import { BroadcastedExcalidrawElement } from "./reconciliation";
 import { encryptData } from "../../src/data/encryption";
-import { PRECEDING_ELEMENT_KEY } from "../../src/constants";
+import { isProd, PRECEDING_ELEMENT_KEY } from "../../src/constants";
 
 class Portal {
   collab: TCollabClass;
@@ -88,7 +88,7 @@ class Portal {
       const json = JSON.stringify(data);
       // const encoded = new TextEncoder().encode(json);
       if(data.type !== 'MOUSE_LOCATION' && data.type !== 'IDLE_STATUS') {
-        console.log('lol sending ws event', data)
+        !isProd && console.log('lol sending ws event', data)
       }
       //const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 

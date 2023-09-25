@@ -3,6 +3,7 @@ import { AppProps } from "./types";
 import { ExcalidrawElement, FontFamilyValues } from "./element/types";
 import { COLOR_PALETTE } from "./colors";
 
+export const isProd = process.env.NODE_ENV === 'production';
 export const isDarwin = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
 export const isWindows = /^Win/.test(navigator.platform);
 export const isAndroid = /\b(android)\b/i.test(navigator.userAgent);
@@ -186,7 +187,7 @@ export const TITLE_TIMEOUT = 10000;
 export const VERSION_TIMEOUT = 30000;
 export const SCROLL_TIMEOUT = 100;
 export const ZOOM_STEP = 0.1;
-export const MIN_ZOOM = 0.1;
+export const MIN_ZOOM = 0.05;
 export const HYPERLINK_TOOLTIP_DELAY = 300;
 
 // Report a user inactive after IDLE_THRESHOLD milliseconds
@@ -237,7 +238,7 @@ export const DEFAULT_EXPORT_PADDING = 10; // px
 
 export const DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT = 1440 * 3;
 
-export const MAX_ALLOWED_FILE_BYTES = (3 * 1024 * 1024) * 3;
+export const MAX_ALLOWED_FILE_BYTES = (3 * 1024 * 1024) * 3 ;
 
 export const SVG_NS = "http://www.w3.org/2000/svg";
 

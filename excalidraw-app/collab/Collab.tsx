@@ -2,7 +2,7 @@ import throttle from "lodash.throttle";
 import { PureComponent } from "react";
 import { ExcalidrawImperativeAPI } from "../../src/types";
 import { ErrorDialog } from "../../src/components/ErrorDialog";
-import { APP_NAME, ENV, EVENT } from "../../src/constants";
+import { APP_NAME, ENV, EVENT, isProd } from "../../src/constants";
 import { ImportedDataState } from "../../src/data/types";
 import {
   ExcalidrawElement,
@@ -482,7 +482,7 @@ class Collab extends PureComponent<Props, CollabState> {
 
         const decryptedData: any = JSON.parse(encryptedData);
         if(decryptedData.type != 'MOUSE_LOCATION' &&  decryptedData.type !== 'IDLE_STATUS') {
-          console.log('lol received ws event', decryptedData)
+          !isProd && console.log('lol received ws event', decryptedData)
         }
         switch (decryptedData.type) {
           case "INVALID_RESPONSE":

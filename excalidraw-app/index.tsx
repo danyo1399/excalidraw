@@ -7,7 +7,7 @@ import { ErrorDialog } from "../src/components/ErrorDialog";
 import { TopErrorBoundary } from "../src/components/TopErrorBoundary";
 import {
   APP_NAME,
-  EVENT,
+  EVENT, isProd,
   THEME,
   TITLE_TIMEOUT,
   VERSION_TIMEOUT,
@@ -108,7 +108,7 @@ polyfill();
 window.EXCALIDRAW_THROTTLE_RENDER = true;
 
 let isSelfEmbedding = false;
-console.log('lol App startup')
+console.log(`lol App startup: ${process.env.NODE_ENV}` , {isProd})
 
 if (window.self !== window.top) {
   try {

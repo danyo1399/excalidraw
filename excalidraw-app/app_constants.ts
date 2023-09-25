@@ -11,7 +11,9 @@ export const CURSOR_SYNC_TIMEOUT = 33; // ~30fps
 // Server and Client constants that must be synced
 // -------------------------------------------------------------------------------------------------------------------------
 export const DELETED_ELEMENT_TIMEOUT = 24 * 60 * 60 * 1000; // 1 day
-export const FILE_UPLOAD_MAX_BYTES = 10 * 1024 * 1024; // 10 MiB
+
+// this value is held ina constants.ts too MAX_ALLOWED_FILE_BYTES
+export const FILE_UPLOAD_MAX_BYTES = 9 * 1024 * 1024; // 9 MiB
 // -------------------------------------------------------------------------------------------------------------------------
 
 
