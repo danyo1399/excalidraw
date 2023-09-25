@@ -11,7 +11,7 @@ export const CURSOR_SYNC_TIMEOUT = 33; // ~30fps
 // Server and Client constants that must be synced
 // -------------------------------------------------------------------------------------------------------------------------
 export const DELETED_ELEMENT_TIMEOUT = 24 * 60 * 60 * 1000; // 1 day
-export const FILE_UPLOAD_MAX_BYTES = 3 * 1024 * 1024; // 3 MiB
+export const FILE_UPLOAD_MAX_BYTES = 10 * 1024 * 1024; // 10 MiB
 // -------------------------------------------------------------------------------------------------------------------------
 
 
