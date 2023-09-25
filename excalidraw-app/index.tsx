@@ -108,6 +108,7 @@ polyfill();
 window.EXCALIDRAW_THROTTLE_RENDER = true;
 
 let isSelfEmbedding = false;
+console.log('lol App startup')
 
 if (window.self !== window.top) {
   try {

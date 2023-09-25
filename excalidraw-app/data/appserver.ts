@@ -8,7 +8,6 @@ import {getSceneVersion} from "../../element";
 import Portal from "../collab/Portal";
 import {reconcileElements} from "../collab/reconciliation";
 import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 const VITE_BACKEND = import.meta.env.VITE_BACKEND
 
@@ -56,7 +55,8 @@ async function fetchGetElements(roomId: string) {
 async function fetchPutElements(roomId: string, elements: readonly SyncableExcalidrawElement[]) {
   const response = await fetch(`${VITE_BACKEND}/rooms/${roomId}/elements`, {
     method: 'PUT',
-    body: JSON.stringify(elements)
+    body: JSON.stringify(elements),
+    headers: {'content-type': 'application/json'}
   });
   if (!response.ok) throw new Error('failed to load elements');
 }
