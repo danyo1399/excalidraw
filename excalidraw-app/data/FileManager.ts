@@ -175,11 +175,9 @@ export class FileManager {
 export const encodeFilesForUpload = async ({
   files,
   maxBytes,
-  encryptionKey,
 }: {
   files: Map<FileId, BinaryFileData>;
   maxBytes: number;
-  encryptionKey: string;
 }) => {
   const processedFiles: {
     id: FileId;
@@ -190,7 +188,6 @@ export const encodeFilesForUpload = async ({
     const buffer = new TextEncoder().encode(fileData.dataURL);
 
     const encodedFile = await compressData<BinaryFileMetadata>(buffer, {
-      encryptionKey,
       metadata: {
         id,
         mimeType: fileData.mimeType,

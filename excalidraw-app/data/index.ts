@@ -133,8 +133,9 @@ export type SocketUpdateData =
     _brand: "socketUpdateData";
   };
 
-const RE_COLLAB_LINK = /^#room=([a-zA-Z0-9_-]+),([a-zA-Z0-9_-]+)$/;
 
+const RE_COLLAB_LINK = /^#room=([a-zA-Z0-9_-]+),([a-zA-Z0-9_-]+)$/;
+const RE_COLLAB_LINK2 = /^#room=([a-zA-Z0-9_-]+)$/;
 export const isCollaborationLink = (link: string) => {
   const hash = new URL(link).hash;
   return RE_COLLAB_LINK.test(hash);
@@ -142,12 +143,16 @@ export const isCollaborationLink = (link: string) => {
 
 export const getCollaborationLinkData = (link: string) => {
   const hash = new URL(link).hash;
-  const match = hash.match(RE_COLLAB_LINK);
-  if (match && match[2].length !== 22) {
-    window.alert(t("alerts.invalidEncryptionKey"));
-    return null;
+  let match = hash.match(RE_COLLAB_LINK);
+  if(!match) {
+    match = hash.match(RE_COLLAB_LINK2);
   }
-  return match ? { roomId: match[1], roomKey: match[2] } : null;
+
+  // if (match && match[2].length !== 22) {
+  //   window.alert(t("alerts.invalidEncryptionKey"));
+  //   return null;
+  // }
+  return match ? { roomId: match[1], roomKey: match[1] } : null;
 };
 
 export const generateCollaborationLinkData = async () => {
@@ -296,7 +301,7 @@ export const exportToBackend = async (
     new TextEncoder().encode(
       serializeAsJSON(elements, appState, files, "database"),
     ),
-    { encryptionKey },
+    { },
   );
 
   try {
@@ -309,7 +314,6 @@ export const exportToBackend = async (
 
     const filesToUpload = await encodeFilesForUpload({
       files: filesMap,
-      encryptionKey,
       maxBytes: FILE_UPLOAD_MAX_BYTES,
     });
 

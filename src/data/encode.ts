@@ -298,9 +298,7 @@ const _encryptAndCompress = async (
  */
 export const compressData = async <T extends Record<string, any> = never>(
   dataBuffer: Uint8Array,
-  options: {
-    encryptionKey: string;
-  } & ([T] extends [never]
+  options: ([T] extends [never]
     ? {
         metadata?: T;
       }
@@ -322,12 +320,13 @@ export const compressData = async <T extends Record<string, any> = never>(
     JSON.stringify(options.metadata || null),
   );
 
-  const { iv, buffer } = await _encryptAndCompress(
-    concatBuffers(contentsMetadataBuffer, dataBuffer),
-    options.encryptionKey,
-  );
+  const buffer = deflate(concatBuffers(contentsMetadataBuffer, dataBuffer))
+  // const { iv, buffer } = await _encryptAndCompress(
+  //   concatBuffers(contentsMetadataBuffer, dataBuffer),
+  //   options.encryptionKey,
+  // );
 
-  return concatBuffers(encodingMetadataBuffer, iv, buffer);
+  return concatBuffers(encodingMetadataBuffer, buffer);
 };
 
 /** @private */
@@ -350,23 +349,19 @@ const _decryptAndDecompress = async (
 
 export const decompressData = async <T extends Record<string, any>>(
   bufferView: Uint8Array,
-  options: { decryptionKey: string },
+  options: {  },
 ) => {
   // first chunk is encoding metadata (ignored for now)
-  const [encodingMetadataBuffer, iv, buffer] = splitBuffers(bufferView);
+  const [encodingMetadataBuffer, buffer] = splitBuffers(bufferView);
 
   const encodingMetadata: FileEncodingInfo = JSON.parse(
     new TextDecoder().decode(encodingMetadataBuffer),
   );
 
   try {
+    const inflated = inflate(buffer);
     const [contentsMetadataBuffer, contentsBuffer] = splitBuffers(
-      await _decryptAndDecompress(
-        iv,
-        buffer,
-        options.decryptionKey,
-        !!encodingMetadata.compression,
-      ),
+      inflated
     );
 
     const metadata = JSON.parse(

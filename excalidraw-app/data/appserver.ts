@@ -143,7 +143,7 @@ export const saveToAppServer = async (
   return { reconciledElements };
 };
 
-export const loadFilesFromAppServer = async (roomId: string, decryptionKey: string,
+export const loadFilesFromAppServer = async (roomId: string,
                                              filesIds: readonly FileId[]) => {
   const loadedFiles: BinaryFileData[] = [];
   const erroredFiles = new Map<FileId, true>();
@@ -159,7 +159,7 @@ export const loadFilesFromAppServer = async (roomId: string, decryptionKey: stri
           const {data, metadata} = await decompressData<BinaryFileMetadata>(
             new Uint8Array(arrayBuffer),
             {
-              decryptionKey,
+
             },
           );
           console.log('lol loaded file', {id, data, metadata})

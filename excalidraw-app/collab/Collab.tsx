@@ -127,7 +127,8 @@ class Collab extends PureComponent<Props, CollabState> {
           throw new AbortError();
         }
 
-        return loadFilesFromAppServer(roomId, roomKey, fileIds);
+        // we dont want to encrypt files. we want anyone with the room key to be able to access
+        return loadFilesFromAppServer(roomId, fileIds);
         //return loadFilesFromFirebase(`files/rooms/${roomId}`, roomKey, fileIds);
       },
       saveFiles: async ({ addedFiles }) => {
@@ -135,10 +136,9 @@ class Collab extends PureComponent<Props, CollabState> {
         if (!roomId || !roomKey) {
           throw new AbortError();
         }
-
+// we dont want to encrypt files. we want anyone with the room key to be able to access
         return await saveFilesToAppServer(roomId, await encodeFilesForUpload({
           files: addedFiles,
-          encryptionKey: roomKey,
           maxBytes: FILE_UPLOAD_MAX_BYTES,
         }));
       },
