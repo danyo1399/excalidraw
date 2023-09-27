@@ -1,6 +1,6 @@
 import "./UserList.scss";
 
-import React from "react";
+import React, {useState} from "react";
 import clsx from "clsx";
 import { AppState, Collaborator } from "../types";
 import { Tooltip } from "./Tooltip";
@@ -21,7 +21,7 @@ export const UserList: React.FC<{
       collaborator,
     );
   });
-
+  const [trackingCollaboratorId, setTrackingCollaboratorId] = useState('');
   const avatars =
     uniqueCollaborators.size > 0 &&
     Array.from(uniqueCollaborators)
@@ -30,6 +30,7 @@ export const UserList: React.FC<{
         const avatarJSX = actionManager.renderAction("goToCollaborator", [
           clientId,
           collaborator,
+          [trackingCollaboratorId, setTrackingCollaboratorId]
         ]);
 
         return mobile ? (
