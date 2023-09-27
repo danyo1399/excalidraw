@@ -74,7 +74,6 @@ import {
   RestoredDataState,
 } from "../src/data/restore";
 import {
-  ExportToExcalidrawPlus,
   exportToExcalidrawPlus,
 } from "./components/ExportToExcalidrawPlus";
 import { updateStaleImageStatuses } from "./data/FileManager";
@@ -754,21 +753,21 @@ const ExcalidrawWrapper = () => {
         <OverwriteConfirmDialog>
           <OverwriteConfirmDialog.Actions.ExportToImage />
           <OverwriteConfirmDialog.Actions.SaveToDisk />
-          {excalidrawAPI && (
-            <OverwriteConfirmDialog.Action
-              title={t("overwriteConfirm.action.excalidrawPlus.title")}
-              actionLabel={t("overwriteConfirm.action.excalidrawPlus.button")}
-              onClick={() => {
-                exportToExcalidrawPlus(
-                  excalidrawAPI.getSceneElements(),
-                  excalidrawAPI.getAppState(),
-                  excalidrawAPI.getFiles(),
-                );
-              }}
-            >
-              {t("overwriteConfirm.action.excalidrawPlus.description")}
-            </OverwriteConfirmDialog.Action>
-          )}
+          {/*{excalidrawAPI && (*/}
+          {/*  <OverwriteConfirmDialog.Action*/}
+          {/*    title={t("overwriteConfirm.action.excalidrawPlus.title")}*/}
+          {/*    actionLabel={t("overwriteConfirm.action.excalidrawPlus.button")}*/}
+          {/*    onClick={() => {*/}
+          {/*      exportToExcalidrawPlus(*/}
+          {/*        excalidrawAPI.getSceneElements(),*/}
+          {/*        excalidrawAPI.getAppState(),*/}
+          {/*        excalidrawAPI.getFiles(),*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {t("overwriteConfirm.action.excalidrawPlus.description")}*/}
+          {/*  </OverwriteConfirmDialog.Action>*/}
+          {/*)}*/}
         </OverwriteConfirmDialog>
         <AppFooter />
         {isCollaborating && isOffline && (
