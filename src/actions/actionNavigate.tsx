@@ -82,8 +82,7 @@ export const actionGoToCollaborator = register({
       <Avatar
         tracking={beingTracked}
         color={background}
-        onClick={() => updateData([collaborator.pointer, false])}
-        onDoubleClick={doubleClickHandler}
+        onClick={doubleClickHandler}
         name={collaborator.username || ""}
         src={collaborator.avatarUrl}
       />
