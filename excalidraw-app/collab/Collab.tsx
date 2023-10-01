@@ -247,13 +247,17 @@ class Collab extends PureComponent<Props, CollabState> {
         );
       }
     } catch (error: any) {
-      this.setState({
-        // firestore doesn't return a specific error code when size exceeded
-        errorMessage: /is longer than.*?bytes/.test(error.message)
-          ? t("errors.collabSaveFailed_sizeExceeded")
-          : t("errors.collabSaveFailed"),
-      });
-      console.error(error);
+      if((error.message as string).includes('401') ) {
+        this.setState({errorMessage: 'Your login has expired. Please refresh your browser to login'})
+      } else {
+        this.setState({
+          // firestore doesn't return a specific error code when size exceeded
+          errorMessage: /is longer than.*?bytes/.test(error.message)
+            ? t("errors.collabSaveFailed_sizeExceeded")
+            : t("errors.collabSaveFailed"),
+        });
+      }
+      console.error(' error occurred', error);
     }
   };
 
@@ -481,9 +485,9 @@ class Collab extends PureComponent<Props, CollabState> {
         // );
 
         const decryptedData: any = JSON.parse(encryptedData);
-        if(decryptedData.type != 'MOUSE_LOCATION' &&  decryptedData.type !== 'IDLE_STATUS') {
-          !isProd && console.log('lol received ws event', decryptedData)
-        }
+        // if(decryptedData.type != 'MOUSE_LOCATION' &&  decryptedData.type !== 'IDLE_STATUS') {
+        //   !isProd && console.log('lol received ws event', decryptedData)
+        // }
         switch (decryptedData.type) {
           case "INVALID_RESPONSE":
             return;

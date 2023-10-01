@@ -103,6 +103,7 @@ export const RoomModal = ({
         <TextField
           value={username}
           placeholder="Your name"
+          readonly={true}
           label="Your name"
           onChange={onUsernameChange}
           onKeyDown={(event) => event.key === KEYS.ENTER && handleClose()}

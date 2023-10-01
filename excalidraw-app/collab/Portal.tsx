@@ -87,9 +87,9 @@ class Portal {
     if (this.isOpen()) {
       const json = JSON.stringify(data);
       // const encoded = new TextEncoder().encode(json);
-      if(data.type !== 'MOUSE_LOCATION' && data.type !== 'IDLE_STATUS') {
-        !isProd && console.log('lol sending ws event', data)
-      }
+      // if(data.type !== 'MOUSE_LOCATION' && data.type !== 'IDLE_STATUS') {
+      //   !isProd && console.log('lol sending ws event', data)
+      // }
       //const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 
       this.socket?.emit(

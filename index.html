@@ -63,13 +63,39 @@
     <!------------------------------------------------------------------------->
     <!--   to minimize white flash on load when user has dark mode enabled   -->
     <script>
+
       try {
+        // Redirect back to same url after login
+        const HREF_KEY = 'redirect_href'
+        const wnd = window;
+
+        wnd.addEventListener('unload', () => {
+          if (wnd) {
+            console.log('lol setting href', wnd.location.href)
+            wnd.sessionStorage.setItem(HREF_KEY, wnd.location.href);
+          }
+        })
+        if(wnd) {
+          console.log('lol location', wnd.location)
+          if (wnd.location.href.includes("redirected")) {
+
+            const redirectUrl = wnd.sessionStorage.getItem(HREF_KEY);
+            if (redirectUrl) {
+              wnd.sessionStorage.removeItem(HREF_KEY);
+              console.log('redirecting to ' + redirectUrl)
+              wnd.location.href = redirectUrl;
+            }
+          }
+
+        }
         //
         const theme = window.localStorage.getItem("excalidraw-theme");
         if (theme === "dark") {
           document.documentElement.classList.add("dark");
         }
-      } catch {}
+      } catch(err) {
+        console.log('error in index.html script', err);
+      }
     </script>
     <style>
       html.dark {

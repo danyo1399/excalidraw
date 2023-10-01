@@ -33,7 +33,7 @@ export const saveFilesToAppServer = async (roomId: string, files: { id: FileId; 
       try {
         const formData = new FormData();
         formData.set('file', new Blob([buffer]));
-        const response = await fetch(`${VITE_BACKEND}/rooms/${roomId}/files/${id}`, {body: formData, method: 'POST'});
+        const response = await fetch(`${VITE_BACKEND}/api/rooms/${roomId}/files/${id}`, {body: formData, method: 'POST'});
         if (!response.ok) throw new Error('failed to send file');
         savedFiles.set(id, true);
       } catch (error: any) {
@@ -46,19 +46,21 @@ export const saveFilesToAppServer = async (roomId: string, files: { id: FileId; 
 }
 
 async function fetchGetElements(roomId: string) {
-  const response = await fetch(`${VITE_BACKEND}/rooms/${roomId}/elements`, {method: 'GET'});
-  if (!response.ok) throw new Error('failed to load elements');
+  const response = await fetch(`${VITE_BACKEND}/api/rooms/${roomId}/elements`, {method: 'GET'});
+  if (!response.ok) throw new Error('failed to load elements: ' + response.status);
   const loadedElements: ExcalidrawElement[] | null = await response.json()
   return loadedElements;
 }
 
 async function fetchPutElements(roomId: string, elements: readonly SyncableExcalidrawElement[]) {
-  const response = await fetch(`${VITE_BACKEND}/rooms/${roomId}/elements`, {
+  const response = await fetch(`${VITE_BACKEND}/api/rooms/${roomId}/elements`, {
     method: 'PUT',
     body: JSON.stringify(elements),
     headers: {'content-type': 'application/json'}
   });
-  if (!response.ok) throw new Error('failed to load elements');
+  if (!response.ok) {
+    throw new Error('failed to load elements: ' + response.status);
+  }
 }
 
 export const loadFromAppServer = async (
@@ -151,7 +153,7 @@ export const loadFilesFromAppServer = async (roomId: string,
   await Promise.all(
     [...new Set(filesIds)].map(async (id) => {
       try {
-        const url = `${VITE_BACKEND}/rooms/${roomId}/files/${id}`
+        const url = `${VITE_BACKEND}/api/rooms/${roomId}/files/${id}`
         const response = await fetch(url);
         if (response.status < 400) {
           const arrayBuffer = await response.arrayBuffer();
