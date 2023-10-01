@@ -13,7 +13,7 @@ export type User = {
 }
 export const loggedInUserAtom = atom<User | null>(null);
 
-await updateUserInfo()
+updateUserInfo()
 setInterval(() => {
   updateUserInfo()
 }, POLLING_INTERVAL)
