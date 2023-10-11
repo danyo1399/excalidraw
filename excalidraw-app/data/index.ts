@@ -136,16 +136,21 @@ export type SocketUpdateData =
 
 const RE_COLLAB_LINK = /^#room=([a-zA-Z0-9_-]+),([a-zA-Z0-9_-]+)$/;
 const RE_COLLAB_LINK2 = /^#room=([a-zA-Z0-9_-]+)$/;
+const RE_COLLAB_LINK3 = /^\?room=([a-zA-Z0-9_-]+)$/;
 export const isCollaborationLink = (link: string) => {
   const hash = new URL(link).hash;
   return RE_COLLAB_LINK.test(hash);
 };
 
 export const getCollaborationLinkData = (link: string) => {
-  const hash = new URL(link).hash;
+  const url = new URL(link)
+  const hash = url.hash;
   let match = hash.match(RE_COLLAB_LINK);
   if(!match) {
     match = hash.match(RE_COLLAB_LINK2);
+  }
+  if(!match) {
+   match = url.search.match(RE_COLLAB_LINK3)
   }
 
   // if (match && match[2].length !== 22) {
@@ -170,7 +175,7 @@ export const getCollaborationLink = (data: {
   roomId: string;
   roomKey: string;
 }) => {
-  return `${window.location.origin}${window.location.pathname}#room=${data.roomId},${data.roomKey}`;
+  return `${window.location.origin}${window.location.pathname}?room=${data.roomId}`;
 };
 
 /**
