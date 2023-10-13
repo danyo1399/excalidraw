@@ -61,7 +61,7 @@ export default defineConfig({
     //
     //   workbox: {
     //     // Don't push fonts and locales to app precache
-    //     globIgnores: ["fonts.css", "**/auth/**", "**/locales/**", "service-worker.js"],
+    //     globIgnores: ["fonts.css", "**/locales/**", "service-worker.js"],
     //     runtimeCaching: [
     //       {
     //         urlPattern: new RegExp("/.+.(ttf|woff2|otf)"),
@@ -111,7 +111,7 @@ export default defineConfig({
     //       {
     //         src: "apple-touch-icon.png",
     //         type: "image/png",
-    //         sizes: "256x256",
+    //         sizes: "180x180",
     //       },
     //     ],
     //     start_url: "/",
