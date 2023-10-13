@@ -12,28 +12,28 @@ export const AppWelcomeScreen: React.FC<{
   const { t } = useI18n();
   let headingContent;
 
-  if (isExcalidrawPlusSignedUser) {
-    headingContent = t("welcomeScreen.app.center_heading_plus")
-      .split(/(Excalidraw\+)/)
-      .map((bit, idx) => {
-        if (bit === "Excalidraw+") {
-          return (
-            <a
-              style={{ pointerEvents: POINTER_EVENTS.inheritFromUI }}
-              href={`${
-                import.meta.env.VITE_APP_PLUS_APP
-              }?utm_source=excalidraw&utm_medium=app&utm_content=welcomeScreenSignedInUser`}
-              key={idx}
-            >
-              Excalidraw+
-            </a>
-          );
-        }
-        return bit;
-      });
-  } else {
-    headingContent = t("welcomeScreen.app.center_heading");
-  }
+  // if (isExcalidrawPlusSignedUser) {
+  //   headingContent = t("welcomeScreen.app.center_heading_plus")
+  //     .split(/(Excalidraw\+)/)
+  //     .map((bit, idx) => {
+  //       if (bit === "Excalidraw+") {
+  //         return (
+  //           <a
+  //             style={{ pointerEvents: POINTER_EVENTS.inheritFromUI }}
+  //             href={`${
+  //               import.meta.env.VITE_APP_PLUS_APP
+  //             }?utm_source=excalidraw&utm_medium=app&utm_content=welcomeScreenSignedInUser`}
+  //             key={idx}
+  //           >
+  //             Excalidraw+
+  //           </a>
+  //         );
+  //       }
+  //       return bit;
+  //     });
+  // } else {
+  //   headingContent = t("welcomeScreen.app.center_heading");
+  // }
 
   return (
     <WelcomeScreen>
@@ -43,7 +43,7 @@ export const AppWelcomeScreen: React.FC<{
       <WelcomeScreen.Hints.ToolbarHint />
       <WelcomeScreen.Hints.HelpHint />
       <WelcomeScreen.Center>
-        <WelcomeScreen.Center.Logo />
+        {/*<WelcomeScreen.Center.Logo />*/}
         <WelcomeScreen.Center.Heading>
           {headingContent}
         </WelcomeScreen.Center.Heading>

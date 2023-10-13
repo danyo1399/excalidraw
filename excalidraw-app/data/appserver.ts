@@ -1,10 +1,10 @@
-import {ExcalidrawElement, FileId} from "../../element/types";
-import {AppState, BinaryFileData, BinaryFileMetadata, DataURL} from "../../types";
-import {decompressData} from "../../data/encode";
-import {MIME_TYPES} from "../../constants";
+import {ExcalidrawElement, FileId} from "../../src/element/types";
+import {AppState, BinaryFileData, BinaryFileMetadata, DataURL} from "../../src/types";
+import {decompressData} from "../../src/data/encode";
+import {MIME_TYPES} from "../../src/constants";
 import {getSyncableElements, SyncableExcalidrawElement} from "./index";
-import {restoreElements} from "../../data/restore";
-import {getSceneVersion} from "../../element";
+import {restoreElements} from "../../src/data/restore";
+import {getSceneVersion} from "../../src/element";
 import Portal from "../collab/Portal";
 import {reconcileElements} from "../collab/reconciliation";
 import {Simulate} from "react-dom/test-utils";

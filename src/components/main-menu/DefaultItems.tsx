@@ -243,27 +243,27 @@ Export.displayName = "Export";
 
 export const Socials = () => (
   <>
-    <DropdownMenuItemLink
-      icon={GithubIcon}
-      href="https://github.com/excalidraw/excalidraw"
-      aria-label="GitHub"
-    >
-      GitHub
-    </DropdownMenuItemLink>
-    <DropdownMenuItemLink
-      icon={DiscordIcon}
-      href="https://discord.gg/UexuTaE"
-      aria-label="Discord"
-    >
-      Discord
-    </DropdownMenuItemLink>
-    <DropdownMenuItemLink
-      icon={TwitterIcon}
-      href="https://twitter.com/excalidraw"
-      aria-label="Twitter"
-    >
-      Twitter
-    </DropdownMenuItemLink>
+    {/*<DropdownMenuItemLink*/}
+    {/*  icon={GithubIcon}*/}
+    {/*  href="https://github.com/excalidraw/excalidraw"*/}
+    {/*  aria-label="GitHub"*/}
+    {/*>*/}
+    {/*  GitHub*/}
+    {/*</DropdownMenuItemLink>*/}
+    {/*<DropdownMenuItemLink*/}
+    {/*  icon={DiscordIcon}*/}
+    {/*  href="https://discord.gg/UexuTaE"*/}
+    {/*  aria-label="Discord"*/}
+    {/*>*/}
+    {/*  Discord*/}
+    {/*</DropdownMenuItemLink>*/}
+    {/*<DropdownMenuItemLink*/}
+    {/*  icon={TwitterIcon}*/}
+    {/*  href="https://twitter.com/excalidraw"*/}
+    {/*  aria-label="Twitter"*/}
+    {/*>*/}
+    {/*  Twitter*/}
+    {/*</DropdownMenuItemLink>*/}
   </>
 );
 Socials.displayName = "Socials";
