@@ -11,6 +11,7 @@ const LibraryMenuBrowseButton = ({
   theme: UIAppState["theme"];
   id: string;
 }) => {
+  return null;
   const referrer =
     libraryReturnUrl || window.location.origin + window.location.pathname;
   return (
